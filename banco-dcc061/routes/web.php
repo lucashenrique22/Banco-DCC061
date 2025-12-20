@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\CreditRequestController;
-use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CreditAnalysisController;
+use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
@@ -48,7 +48,7 @@ Route::middleware(['auth', 'admin'])
         Route::post('credits/{creditRequest}', [CreditAnalysisController::class, 'update'])->name('credits.update');
 
         // Gerenciar investimentos
-        Route::resource('investments', InvestmentController::class)->except(['show']);
+        Route::resource('investments', AdminInvestmentController::class);
     });
 
 require __DIR__ . '/auth.php';

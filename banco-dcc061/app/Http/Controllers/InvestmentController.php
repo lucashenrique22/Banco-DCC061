@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Investment;
 use Illuminate\Http\Request;
 
 class InvestmentController extends Controller
@@ -11,6 +12,7 @@ class InvestmentController extends Controller
      */
     public function index()
     {
-        
+        $investments = Investment::all();
+        return view('investments.index', compact('investments'));
     }
 }
