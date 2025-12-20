@@ -1,12 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <p>Bem-vindo, <strong>{{ auth()->user()->name }}</strong></p>
-        <p class="text-sm text-gray-600">
-            Perfil: {{ ucfirst(auth()->user()->role) }}
-        </p>
     </x-slot>
 
-    <div class="py-8">
+    <div class="py-8 pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- MENU ADMINISTRADOR -->
             @if(auth()->user()->isAdmin())
