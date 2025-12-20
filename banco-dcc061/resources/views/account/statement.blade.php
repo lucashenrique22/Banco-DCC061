@@ -8,6 +8,11 @@
     <div class="py-8 pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+            <!-- @if (session('sucess'))
+                <div class="p-4 font-bold text-sm text-center text-green-500">
+                    {{ session('sucess') }}
+                </div>
+            @endif -->
             <!-- SALDO -->
             <div class="bg-white shadow-sm rounded-lg p-6 mb-6">
                 <h3 class="text-lg font-semibold mb-2">Saldo Atual</h3>
@@ -26,21 +31,21 @@
                 <table class="w-full table-auto border-collapse">
                     <thead>
                         <tr class="border-b">
-                            <th class="text-left py-2">Data</th>
-                            <th class="text-left py-2">Tipo</th>
-                            <th class="text-right py-2">Valor</th>
+                            <th class="text-center py-2">Data</th>
+                            <th class="text-center py-2">Tipo</th>
+                            <th class="text-center py-2">Valor</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($transactions as $transaction)
                         <tr class="border-b">
-                            <td class="py-2">
-                                {{ $transaction->created_at->format('d/m/Y H:i') }}
+                            <td class="py-2 text-center">
+                                {{ $transaction->created_at->format('d/m/Y') }}
                             </td>
-                            <td class="py-2 capitalize">
-                                {{ $transaction->type }}
+                            <td class="py-2 text-center">
+                                {{ ucfirst($transaction->type) }}
                             </td>
-                            <td class="py-2 text-right">
+                            <td class="py-2 text-center">
                                 R$ {{ number_format($transaction->amount, 2, ',', '.') }}
                             </td>
                         </tr>
