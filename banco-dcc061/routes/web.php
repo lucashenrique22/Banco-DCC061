@@ -1,22 +1,54 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\InvestmentsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\CreditRequestController;
+use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CreditAnalysisController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('investments', InvestmentsController::class);
+    // Saldo / Extrato 
+    Route::get('/extrato', [AccountController::class, 'statement'])->name('account.statement');
 
-    Route::resource('admin/users', UserController::class);
+    // Depósito 
+    Route::get('/deposito', [TransactionController::class, 'depositForm'])->name('transaction.deposit');
+    Route::post('/deposito', [TransactionController::class, 'deposit']);
+
+    // Transferência 
+    Route::get('/transferencia', [TransactionController::class, 'transferForm'])->name('transaction.transfer');
+    Route::post('/transferencia', [TransactionController::class, 'transfer']);
+
+    // Crédito 
+    Route::get('/credito/solicitar', [CreditRequestController::class, 'create'])->name('credit.request');
+    Route::post('/credito/solicitar', [CreditRequestController::class, 'store']);
+
+    // Investimentos 
+    Route::get('/investimentos', [InvestmentController::class, 'index'])->name('investments.index');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        // Gerenciar usuários 
+        Route::resource('users', UserController::class);
+
+        // Avaliação de crédito 
+        Route::get('credits', [CreditAnalysisController::class, 'index'])->name('credits.index');
+        Route::post('credits/{creditRequest}', [CreditAnalysisController::class, 'update'])->name('credits.update');
+
+        // Gerenciar investimentos
+        Route::resource('investments', InvestmentController::class)->except(['show']);
+    });
+
+require __DIR__ . '/auth.php';

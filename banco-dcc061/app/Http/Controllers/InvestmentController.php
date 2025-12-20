@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class InvestmentController extends Controller
 {
     /**
-     * Display the dashboard view.
+     * Display a listing of the investments.
      */
     public function index()
     {
-        return view('dashboard');
+        
     }
 }

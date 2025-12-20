@@ -5,6 +5,10 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <div>   
+            <h2 class="mb-4 text-xl font-semibold text-gray-900 text-center">{{ __('Sistema de Banco') }}</h2>
+        </div>
+
         <!-- CPF -->
         <div>
             <x-input-label for="cpf" :value="__('CPF')" />
