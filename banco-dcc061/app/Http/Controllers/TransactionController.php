@@ -59,19 +59,11 @@ class TransactionController extends Controller
                 throw new Exception('Conta de destino não encontrada');
             }
 
-            $this->transactionService->transfer(
-                $fromAccount,
-                (string) $destination->id,
-                (float) $request->amount
-            );
+            $this->transactionService->transfer($fromAccount, (string) $destination->id, (float) $request->amount);
 
-            return redirect()
-                ->route('account.statement')
-                ->with('success', 'Transferência realizada com sucesso!');
+            return redirect()->route('account.statement')->with('success', 'Transferência realizada com sucesso!');
         } catch (Exception $e) {
-            return back()
-                ->withErrors(['amount' => $e->getMessage()])
-                ->withInput();
+            return back()->withErrors(['amount' => $e->getMessage()])->withInput();
         }
     }
 }
