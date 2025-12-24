@@ -20,7 +20,7 @@
                 <div class="border rounded p-4 mb-4">
                     <p><strong>Usuário:</strong> {{ $credit->user->name }}</p>
                     <p><strong>Valor:</strong> R$ {{ number_format($credit->amount, 2, ',', '.') }}</p>
-                    <p><strong>Status:</strong> {{ $credit->status }}</p>
+                    <p><strong>Status:</strong> {{ ucfirst($credit->status) }}</p>
 
                     <form method="POST" action="{{ route('admin.credits.update', $credit->id) }}">
                         @csrf

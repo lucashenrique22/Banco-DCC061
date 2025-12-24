@@ -14,7 +14,7 @@ class AccountController extends Controller
         $user = auth()->user();
 
         // Conta do usuário (assumindo 1 conta por usuário)
-        $account = $user->accounts()->first();
+        $account = $user->account()->first();
         
         if (!$account) {
             abort(404, 'Conta não encontrada');

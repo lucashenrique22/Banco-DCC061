@@ -22,9 +22,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function accounts()
+    public function account()
     {
-        return $this->hasMany(Account::class);
+        return $this->hasOne(Account::class);
     }
 
     public function creditRequests()

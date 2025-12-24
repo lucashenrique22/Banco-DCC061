@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CreditRequest;
+use App\Services\TransactionService;
 use Illuminate\Http\Request;
 
 class CreditAnalysisController extends Controller
@@ -14,12 +15,18 @@ class CreditAnalysisController extends Controller
         return view('admin.credits.index', compact('requests'));
     }
 
-    public function update(Request $request, CreditRequest $creditRequest)
+    public function update(Request $request, CreditRequest $creditRequest, TransactionService $transactionService)
     {
         $request->validate([
             'status' => ['required', 'in:aprovado,rejeitado'],
             'analysis_notes' => ['nullable', 'string'],
         ]);
+
+        if ($request->status === 'aprovado') {
+            $account = $creditRequest->user->account;
+
+            $transactionService->deposit($account, $creditRequest->amount);
+        }
 
         $creditRequest->update([
             'status' => $request->status,
