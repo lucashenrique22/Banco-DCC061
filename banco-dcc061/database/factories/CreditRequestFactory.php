@@ -20,7 +20,7 @@ class CreditRequestFactory extends Factory
             'user_id' => $this->faker->randomElement([1, 2, 3]),
             'investment_id' => $this->faker->randomElement([1, 2, 3]),
             'amount' => $this->faker->randomFloat(2, 1000, 10000),
-            'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            'status' => $this->faker->randomElement(['pendente', 'aprovado', 'rejeitado']),
             'approved_by' => null,
             'analysis_notes' => null,
         ];

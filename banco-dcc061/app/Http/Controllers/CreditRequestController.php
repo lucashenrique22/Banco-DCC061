@@ -21,7 +21,7 @@ class CreditRequestController extends Controller
         CreditRequest::create([
             'user_id' => auth()->id(),
             'amount' => $request->amount,
-            'status' => 'pending',
+            'status' => 'pendente',
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Solicitação de crédito enviada com sucesso!');

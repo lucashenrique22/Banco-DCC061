@@ -37,8 +37,8 @@
                         </div>
 
                         <div class="mt-4 flex justify-center gap-2">
-                            <x-primary-button type="submit" name="status" value="approved">Aprovar</x-primary-button>
-                            <x-danger-button type="submit" name="status" value="rejected">Rejeitar</x-danger-button>
+                            <x-primary-button type="submit" name="status" value="aprovado">Aprovar</x-primary-button>
+                            <x-danger-button type="submit" name="status" value="rejeitado">Rejeitar</x-danger-button>
                         </div>
                     </form>
                 </div>

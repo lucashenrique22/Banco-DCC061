@@ -10,14 +10,14 @@ class CreditAnalysisController extends Controller
 {
     public function index()
     {
-        $requests = CreditRequest::where('status', 'pending')->with('user')->get();
+        $requests = CreditRequest::where('status', 'pendente')->with('user')->get();
         return view('admin.credits.index', compact('requests'));
     }
 
     public function update(Request $request, CreditRequest $creditRequest)
     {
         $request->validate([
-            'status' => ['required', 'in:approved,rejected'],
+            'status' => ['required', 'in:aprovado,rejeitado'],
             'analysis_notes' => ['nullable', 'string'],
         ]);
 
