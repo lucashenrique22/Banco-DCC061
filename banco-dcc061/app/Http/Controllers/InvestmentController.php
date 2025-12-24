@@ -12,7 +12,6 @@ class InvestmentController extends Controller
      */
     public function index()
     {
-        $investments = Investment::all();
-        return view('investments.index', compact('investments'));
+        return view('investments.index', ['investments' => Investment::all()]);
     }
 }

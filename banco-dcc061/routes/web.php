@@ -48,7 +48,7 @@ Route::middleware(['auth', 'admin'])
         Route::post('credits/{creditRequest}', [CreditAnalysisController::class, 'update'])->name('credits.update');
 
         // Gerenciar investimentos
-        Route::resource('investments', AdminInvestmentController::class);
+        Route::resource('investments', AdminInvestmentController::class)->except(['show']);
     });
 
 require __DIR__ . '/auth.php';
