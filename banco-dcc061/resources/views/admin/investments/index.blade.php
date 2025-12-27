@@ -27,7 +27,7 @@
                 <div class="flex justify-between items-center mb-4">
                     <a
                         href="{{ route('admin.investments.create') }}"
-                        class="px-4 py-2 text-black rounded ">
+                        class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
                         Novo Investimento
                     </a>
                 </div>
