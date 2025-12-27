@@ -25,7 +25,7 @@ class UserController extends Controller
             'name' => 'required',
             'cpf' => 'required|unique:users',
             'password' => 'required|min:6',
-            'role' => 'required|in:admin,user',
+            'role' => 'required|in:administrador,usuario',
         ]);
 
         User::create([

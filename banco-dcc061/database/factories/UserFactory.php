@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'cpf' => $this->faker->unique()->numerify('###########'),
-            'role' => 'user',
+            'role' => 'usuario',
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
@@ -45,7 +45,7 @@ class UserFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role' => 'admin',
+            'role' => 'administrador',
             'cpf' => '18491385088',
         ]);
     }

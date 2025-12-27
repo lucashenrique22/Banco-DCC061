@@ -10,22 +10,22 @@
                 Novo Usuário
             </a>
 
-            <table class="w-full table-fixed">
+            <table class="w-full table-fixed border-collapse">
                 <thead>
                     <tr class="border-b">
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Perfil</th>
-                        <th>Ações</th>
+                        <th class="text-center py-2">Nome</th>
+                        <th class="text-center py-2">CPF</th>
+                        <th class="text-center py-2">Perfil</th>
+                        <th class="text-center py-2">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                     <tr class="border-b">
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->cpf }}</td>
-                        <td>{{ $user->role }}</td>
-                        <td>
+                        <td class="text-center py-2">{{ $user->name }}</td>
+                        <td class="text-center py-2">{{ $user->cpf }}</td>
+                        <td class="text-center py-2">{{ $user->role }}</td>
+                        <td class="text-center py-2">
                             <form method="POST"
                                 action="{{ route('admin.users.destroy', $user) }}">
                                 @csrf
