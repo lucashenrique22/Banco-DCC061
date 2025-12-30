@@ -26,7 +26,7 @@ class TransactionController extends Controller
         $request->validate(['amount' => ['required', 'numeric', 'min:1']]);
 
         try {
-            $account = auth()->user()->accounts()->firstOrFail();
+            $account = auth()->user()->account()->firstOrFail();
 
             $this->transactionService->deposit($account, (float) $request->amount);
 

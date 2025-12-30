@@ -6,12 +6,16 @@
     </x-slot>
 
     <div class="pt-4 max-w-7xl mx-auto">
+        @if(session('success'))
+        <div class="mb-4 font-medium text-sm text-center text-green-600">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="bg-white p-6 rounded shadow">
             <a href="{{ route('admin.users.create') }}"
                 class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
                 Novo Usuário
             </a>
-
             <table class="w-full table-fixed border-collapse">
                 <thead>
                     <tr class="border-b">

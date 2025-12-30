@@ -8,12 +8,11 @@
     <div class="pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            @if (session('success'))
-            <div
-                data-success
-                class="mb-6 rounded border border-green-300 bg-green-50 px-4 py-3 text-green-800 font-medium">
+            @if(session('success'))
+            <div class="mb-4 font-medium text-sm text-center text-green-600">
                 {{ session('success') }}
             </div>
+            @endif
 
             <script>
                 setTimeout(() => {
@@ -52,10 +51,10 @@
                                     {{ $investment->name }}
                                 </td>
                                 <td class="py-2 text-center">
-                                    {{ number_format($investment->rate, 2, ',', '.') }}%
+                                    {{ number_format($investment->profitability, 2, ',', '.') }}%
                                 </td>
                                 <td class="py-2 text-center">
-                                    {{ $investment->term }}
+                                    {{ $investment->term_months }}
                                 </td>
                                 <td class="py-2 text-center">
                                     <a

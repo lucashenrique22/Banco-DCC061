@@ -7,10 +7,10 @@
 
     <div class="py-8 pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (session('success'))
-                <div class="p-4 text-center text-green-500">
-                    {{ session('success') }}
-                </div>
+            @if(session('success'))
+            <div class="mb-4 font-medium text-sm text-center text-green-600">
+                {{ session('success') }}
+            </div>
             @endif
             <!-- SALDO -->
             <div class="bg-white shadow-sm rounded-lg p-6 mb-6">
