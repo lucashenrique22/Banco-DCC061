@@ -10,19 +10,19 @@
             <table class="w-full table-fixed">
                 <thead>
                     <tr class="border-b">
-                        <th class="text-center w-1/4">Nome</th>
-                        <th class="text-center w-1/4">Tipo</th>
-                        <th class="text-center w-1/4">Rentabilidade</th>
-                        <th class="text-center w-1/4">Mínimo</th>
+                        <th class="text-center py-2">Nome</th>
+                        <th class="text-center py-2">Tipo</th>
+                        <th class="text-center py-2">Rentabilidade</th>
+                        <th class="text-center py-2">Mínimo</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($investments as $investment)
                     <tr class="border-b">
-                        <td class="text-center">{{ $investment->name }}</td>
-                        <td class="text-center">{{ $investment->type }}</td>
-                        <td class="text-center">{{ $investment->profitability }}%</td>
-                        <td class="text-center">
+                        <td class="text-center py-2">{{ $investment->name }}</td>
+                        <td class="text-center py-2">{{ $investment->type }}</td>
+                        <td class="text-center py-2">{{ $investment->profitability }}%</td>
+                        <td class="text-center py-2">
                             R$ {{ number_format($investment->minimum_value, 2, ',', '.') }}
                         </td>
                     </tr>

@@ -12,7 +12,6 @@
             <div class="mb-4 font-medium text-sm text-center text-green-600">
                 {{ session('success') }}
             </div>
-            @endif
 
             <script>
                 setTimeout(() => {
