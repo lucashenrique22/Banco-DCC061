@@ -30,7 +30,7 @@ class UserController extends Controller
 
         User::create([
             'name' => $request->name,
-            'cpf' => $request->cpf,
+            'cpf' => preg_replace('/\D/', '', $request->cpf),
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);

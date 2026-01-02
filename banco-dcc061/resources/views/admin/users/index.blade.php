@@ -29,7 +29,7 @@
                     @foreach($users as $user)
                     <tr class="border-b">
                         <td class="text-center py-2">{{ $user->name }}</td>
-                        <td class="text-center py-2">{{ $user->cpf }}</td>
+                        <td class="text-center py-2">{{ preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $user->cpf) }}</td>
                         <td class="text-center py-2">{{ ucfirst($user->role) }}</td>
                         <td class="text-center py-2">
                             <form method="POST"
