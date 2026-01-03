@@ -32,6 +32,9 @@
                         <td class="text-center py-2">{{ preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $user->cpf) }}</td>
                         <td class="text-center py-2">{{ ucfirst($user->role) }}</td>
                         <td class="text-center py-2">
+                            <a href="{{ route('admin.users.edit', $user) }}"
+                                class="text-blue-600 mr-3">Editar
+                            </a>
                             <form method="POST"
                                 action="{{ route('admin.users.destroy', $user) }}">
                                 @csrf

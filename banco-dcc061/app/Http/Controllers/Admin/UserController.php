@@ -19,6 +19,31 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    public function edit(User $user)
+    {
+        return view('admin.users.edit', ['user' => $user]);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'cpf' => 'required|string|unique:users,cpf,' . $user->id,
+            'role' => 'required|in:administrador,usuario',
+            'password' => 'nullable|min:6',
+        ]);
+
+        $data = $request->only('name', 'cpf', 'role');
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado com sucesso!');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
