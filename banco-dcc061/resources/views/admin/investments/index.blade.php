@@ -40,6 +40,7 @@
                                 <th class="text-center w-1/4 py-2">Nome</th>
                                 <th class="text-center w-1/4 py-2">Taxa (%)</th>
                                 <th class="text-center w-1/4 py-2">Prazo (meses)</th>
+                                <th class="text-center w-1/4 py-2">Valor mínimo</th>
                                 <th class="text-center w-1/4 py-2">Ações</th>
                             </tr>
                         </thead>
@@ -54,6 +55,9 @@
                                 </td>
                                 <td class="py-2 text-center">
                                     {{ $investment->term_months }}
+                                </td>
+                                <td class="py-2 text-center">
+                                    R$ {{ number_format($investment->minimum_value, 2, ',', '.') }}
                                 </td>
                                 <td class="py-2 text-center">
                                     <a
