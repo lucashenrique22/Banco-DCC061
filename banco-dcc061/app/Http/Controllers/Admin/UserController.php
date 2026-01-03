@@ -39,7 +39,12 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
-        $user->update($data);
+        $user->update([
+            'name' => $data['name'],
+            'cpf' => preg_replace('/\D/', '', $data['cpf']),
+            'role' => $data['role'],
+            'password' => $data['password'] ?? $user->password,
+        ]);
 
         return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado com sucesso!');
     }
