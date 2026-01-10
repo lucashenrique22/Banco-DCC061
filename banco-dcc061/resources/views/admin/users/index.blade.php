@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="pt-4 max-w-7xl mx-auto">
-        @if(session('success'))
+        @if (session('success'))
         <div class="mb-4 font-medium text-sm text-center text-green-600">
             {{ session('success') }}
         </div>
@@ -31,16 +31,16 @@
                         <td class="text-center py-2">{{ $user->name }}</td>
                         <td class="text-center py-2">{{ preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $user->cpf) }}</td>
                         <td class="text-center py-2">{{ ucfirst($user->role) }}</td>
-                        <td class="text-center py-2">
-                            <a href="{{ route('admin.users.edit', $user) }}"
-                                class="text-blue-600 mr-3">Editar
+                        <td class="text-center py-2 flex justify-center items-center gap-2">
+                            <a href="{{ route('admin.users.edit', $user) }}" class="text-blue-600 mr-3">
+                                ✏️
                             </a>
                             <form method="POST"
                                 action="{{ route('admin.users.destroy', $user) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button class="text-red-600">
-                                    Excluir
+                                    🗑️
                                 </button>
                             </form>
                         </td>

@@ -21,27 +21,23 @@
             </script>
             @endif
 
-            <div class="bg-white shadow-sm rounded-lg p-6">
-                <div class="flex justify-between items-center mb-4">
-                    <a
-                        href="{{ route('admin.investments.create') }}"
-                        class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
-                        Novo Investimento
-                    </a>
-                </div>
+            <div class="bg-white p-6 rounded shadow">
+                <a href="{{ route('admin.investments.create') }}"
+                    class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white rounded">
+                    Novo Investimento
+                </a>
 
                 @if($investments->isEmpty())
                 <p class="text-gray-600">Nenhum investimento cadastrado.</p>
                 @else
-                <div class="overflow-x-auto">
-                    <table class="w-full table-fixed border-collapse">
-                        <thead>
+                <table class="w-full table-fixed border-collapse">
+                    <thead>
                             <tr class="border-b">
-                                <th class="text-center w-1/4 py-2">Nome</th>
-                                <th class="text-center w-1/4 py-2">Taxa (%)</th>
-                                <th class="text-center w-1/4 py-2">Prazo (meses)</th>
-                                <th class="text-center w-1/4 py-2">Valor mínimo</th>
-                                <th class="text-center w-1/4 py-2">Ações</th>
+                                <th class="text-center py-2">Nome</th>
+                                <th class="text-center py-2">Taxa (%)</th>
+                                <th class="text-center py-2">Prazo (meses)</th>
+                                <th class="text-center py-2">Valor mínimo</th>
+                                <th class="text-center py-2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,25 +55,17 @@
                                 <td class="py-2 text-center">
                                     R$ {{ number_format($investment->minimum_value, 2, ',', '.') }}
                                 </td>
-                                <td class="py-2 text-center">
-                                    <a
-                                        href="{{ route('admin.investments.edit', $investment) }}"
-                                        class="text-indigo-600 hover:underline">
-                                        Editar
+                                <td class="py-2 text-center flex justify-center items-center gap-2">
+                                    <a href="{{ route('admin.investments.edit', $investment) }}" class="text-blue-600">
+                                        ✏️
                                     </a>
-
-                                    <form
-                                        method="POST"
-                                        action="{{ route('admin.investments.destroy', $investment) }}"
-                                        class="inline">
+                                    <form method="POST"
+                                        action="{{ route('admin.investments.destroy', $investment) }}">
                                         @csrf
                                         @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="text-red-600 hover:underline ml-2"
+                                        <button class="text-red-600"
                                             onclick="return confirm('Deseja remover este investimento?')">
-                                            Excluir
+                                            🗑️
                                         </button>
                                     </form>
                                 </td>
@@ -85,7 +73,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
                 @endif
 
             </div>

@@ -26,11 +26,10 @@
 
                     <x-input-label value="Taxa (%)" />
                     <x-text-input id="profitability" name="profitability" type="number" step="0.01" :value="old('profitability', $investment->profitability)" class="w-full mb-4" required />
-                    <div class="flex gap-4">
+                    <div class="flex gap-2">
                         <x-primary-button>Salvar</x-primary-button>
-                        <x-danger-button href="{{ route('admin.investments.index') }}" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">
-                            Cancelar
-                        </x-danger-button>
+                        <a href="{{ route('admin.investments.index')}}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700
+                     focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Cancelar</a>
                     </div>
                 </form>
             </div>
