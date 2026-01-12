@@ -11,6 +11,9 @@
             {{ session('success') }}
         </div>
         @endif
+
+        <x-input-error :messages="session('error')" class="mb-4 text-center" />
+        
         <div class="bg-white p-6 rounded shadow">
             <a href="{{ route('admin.users.create') }}"
                 class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
@@ -36,10 +39,11 @@
                                 ✏️
                             </a>
                             <form method="POST"
-                                action="{{ route('admin.users.destroy', $user) }}">
+                                action="{{ route('admin.users.destroy', $user) }}"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.');">
                                 @csrf
                                 @method('DELETE')
-                                <button class="text-red-600">
+                                <button type="submit">
                                     🗑️
                                 </button>
                             </form>
