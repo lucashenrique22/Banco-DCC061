@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Services\TransactionService;
 use Exception;
@@ -57,7 +58,7 @@ class TransactionController extends Controller
         }
 
         try {
-            
+
             $fromAccount = $user->account()->firstOrFail();
 
             // Conta destino (exemplo simples: pelo ID ou número)
@@ -67,11 +68,21 @@ class TransactionController extends Controller
                 throw new Exception('Conta de destino não encontrada');
             }
 
-            $this->transactionService->transfer($fromAccount, $destination, (float) $request->amount);
+            $transaction = $this->transactionService->transfer($fromAccount, $destination, (float) $request->amount);
 
-            return redirect()->route('account.statement')->with('success', 'Transferência realizada com sucesso!');
+            return redirect()->route('transaction.receipt', ['transaction' => $transaction->id])->with('success', 'Transferência realizada com sucesso!');
         } catch (Exception $e) {
             return back()->withErrors(['amount' => $e->getMessage()])->withInput();
         }
+    }
+
+    public function receipt(Transaction $transaction)
+    {
+        // Segurança: só o dono da conta pode ver
+        if (!$transaction->account || $transaction->account->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('transactions.receipt', compact('transaction'));
     }
 }

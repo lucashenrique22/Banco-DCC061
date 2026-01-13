@@ -22,11 +22,11 @@ class TransactionService
             throw new Exception('Saldo insuficiente');
         }
 
-        DB::transaction(function () use ($from, $destination, $amount) {
+       return DB::transaction(function () use ($from, $destination, $amount) {
             $from->decrement('balance', $amount);
             $destination->increment('balance', $amount);
 
-            Transaction::create([
+            $saida = Transaction::create([
                 'account_id' => $from->id,
                 'type' => 'transferencia',
                 'amount' => $amount,
@@ -40,7 +40,9 @@ class TransactionService
                 'amount' => $amount,
                 'destination_account' => $from->account_number,
             ]);
+            return $saida;
         });
+
     }
 
     public function deposit(Account $account, float $amount)
@@ -49,10 +51,10 @@ class TransactionService
             throw new Exception('Valor inválido');
         }
 
-        DB::transaction(function () use ($account, $amount) {
+        return DB::transaction(function () use ($account, $amount) {
             $account->increment('balance', $amount);
 
-            Transaction::create([
+            return Transaction::create([
                 'account_id' => $account->id,
                 'type' => 'deposito',
                 'amount' => $amount,
