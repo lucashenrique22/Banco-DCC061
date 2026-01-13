@@ -6,6 +6,7 @@ use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Services\TransactionService;
 use Exception;
+use Illuminate\Support\Facades\Hash;
 
 class TransactionController extends Controller
 {
@@ -46,20 +47,27 @@ class TransactionController extends Controller
         $request->validate([
             'destination_account' => ['required', 'string'],
             'amount' => ['required', 'numeric', 'min:1'],
+            'password' => ['required', 'string'],
         ]);
 
+        $user = auth()->user();
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->withErrors(['password' => 'Senha incorreta'])->withInput();
+        }
+
         try {
-            $user = auth()->user();
-            $fromAccount = $user->accounts()->firstOrFail();
+            
+            $fromAccount = $user->account()->firstOrFail();
 
             // Conta destino (exemplo simples: pelo ID ou número)
-            $destination = Account::where('id', $request->destination_account)->first();
+            $destination = Account::where('account_number', $request->destination_account)->firstOrFail();
 
             if (!$destination) {
                 throw new Exception('Conta de destino não encontrada');
             }
 
-            $this->transactionService->transfer($fromAccount, (string) $destination->id, (float) $request->amount);
+            $this->transactionService->transfer($fromAccount, $destination, (float) $request->amount);
 
             return redirect()->route('account.statement')->with('success', 'Transferência realizada com sucesso!');
         } catch (Exception $e) {

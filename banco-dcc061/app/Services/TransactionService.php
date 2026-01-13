@@ -8,10 +8,14 @@ use Exception;
 
 class TransactionService
 {
-    public function transfer(Account $from, string $destination, float $amount)
+    public function transfer(Account $from, Account $destination, float $amount)
     {
         if ($amount <= 0) {
             throw new Exception('Valor inválido');
+        }
+
+        if ($from->id === $destination->id) {
+            throw new Exception('Conta de origem e destino não podem ser iguais');
         }
 
         if ($from->balance < $amount) {
@@ -20,12 +24,21 @@ class TransactionService
 
         DB::transaction(function () use ($from, $destination, $amount) {
             $from->decrement('balance', $amount);
+            $destination->increment('balance', $amount);
 
             Transaction::create([
                 'account_id' => $from->id,
                 'type' => 'transferencia',
                 'amount' => $amount,
-                'destination_account' => $destination,
+                'destination_account' => $destination->account_number,
+            ]);
+
+            // Registro da entrada
+            Transaction::create([
+                'account_id' => $destination->id,
+                'type' => 'transferencia',
+                'amount' => $amount,
+                'destination_account' => $from->account_number,
             ]);
         });
     }
