@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
     // Saldo / Extrato 
     Route::get('/extrato', [AccountController::class, 'confirmPassword'])->name('account.statement.confirm');
     Route::post('/extrato', [AccountController::class, 'statement'])->name('account.statement');
+    Route::get('/extrato/pdf', [AccountController::class, 'generatePdf'])->name('account.statement.pdf');
+    Route::get('/extrato/xml', [AccountController::class, 'generateXml'])->name('account.statement.xml');
 
     // Depósito 
     Route::get('/deposito', [TransactionController::class, 'depositForm'])->name('transaction.deposit');

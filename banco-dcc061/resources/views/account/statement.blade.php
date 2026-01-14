@@ -53,7 +53,17 @@
                 </table>
                 @endif
             </div>
+            <div class="flex justify-end gap-3 pt-4">
+                <a href="{{ route('account.statement.pdf') }}"
+                    class="px-3 py-1 bg-red-600 text-white rounded">
+                    Exportar PDF
+                </a>
 
+                <a href="{{ route('account.statement.xml') }}"
+                    class="px-3 py-1 bg-blue-600 text-white rounded">
+                    Exportar XML
+                </a>
+            </div>
         </div>
     </div>
 </x-app-layout>
