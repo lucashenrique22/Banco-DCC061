@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     // Depósito 
     Route::get('/deposito', [TransactionController::class, 'depositForm'])->name('transaction.deposit');
     Route::post('/deposito', [TransactionController::class, 'deposit']);
+    Route::get('/deposito/{transaction}/comprovante', [TransactionController::class, 'depositReceipt'])->name('transaction.deposit.receipt');
 
     // Transferência 
     Route::get('/transferencia', [TransactionController::class, 'transferForm'])->name('transaction.transfer');

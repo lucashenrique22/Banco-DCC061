@@ -30,9 +30,9 @@ class TransactionController extends Controller
         try {
             $account = auth()->user()->account()->firstOrFail();
 
-            $this->transactionService->deposit($account, (float) $request->amount);
+            $transaction = $this->transactionService->deposit($account, (float) $request->amount);
 
-            return redirect()->route('account.statement')->with('success', 'Depósito realizado com sucesso!');
+            return redirect()->route('transaction.deposit.receipt', $transaction)->with('success', 'Depósito realizado com sucesso!');
         } catch (Exception $e) {
             return back()->withErrors(['amount' => $e->getMessage()])->withInput();
         }
@@ -78,11 +78,19 @@ class TransactionController extends Controller
 
     public function receipt(Transaction $transaction)
     {
-        // Segurança: só o dono da conta pode ver
         if (!$transaction->account || $transaction->account->user_id !== auth()->id()) {
             abort(403);
         }
 
         return view('transactions.receipt', compact('transaction'));
+    }
+
+    public function depositReceipt(Transaction $transaction)
+    {
+        if (!$transaction->account || $transaction->account->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('transactions.deposit-receipt', compact('transaction'));
     }
 }
