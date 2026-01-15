@@ -22,8 +22,20 @@ class CreditAnalysisController extends Controller
             'analysis_notes' => ['nullable', 'string'],
         ]);
 
+        if ($creditRequest->status !== 'pendente') {
+            return back()->withErrors([
+                'status' => 'Esta solicitação já foi avaliada.'
+            ]);
+        }
+
         if ($request->status === 'aprovado') {
             $account = $creditRequest->user->account;
+
+            if (!$account) {
+                return back()->withErrors([
+                    'status' => 'Conta do cliente não encontrada.'
+                ]);
+            }
 
             $transactionService->deposit($account, $creditRequest->amount);
         }

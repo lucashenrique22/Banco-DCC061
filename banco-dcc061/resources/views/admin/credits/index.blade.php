@@ -12,41 +12,77 @@
                 {{ session('success') }}
             </div>
             @endif
+
             <div class="bg-white shadow-sm rounded-lg p-6">
                 @if($requests->isEmpty())
-                <p class="text-black-600">Nenhuma solicitação encontrada.</p>
+                <p class="text-gray-600 text-center">
+                    Nenhuma solicitação encontrada.
+                </p>
                 @else
+
                 @foreach($requests as $credit)
                 <div class="border rounded p-4 mb-4">
-                    <p><strong>Usuário:</strong> {{ $credit->user->name }}</p>
-                    <p><strong>Valor:</strong> R$ {{ number_format($credit->amount, 2, ',', '.') }}</p>
-                    <p><strong>Status:</strong> {{ ucfirst($credit->status) }}</p>
 
-                    <form method="POST" action="{{ route('admin.credits.update', $credit->id) }}">
+                    <p>
+                        <strong>Usuário:</strong>
+                        {{ $credit->user->name }}
+                    </p>
+
+                    <p>
+                        <strong>Valor solicitado:</strong>
+                        R$ {{ number_format($credit->amount, 2, ',', '.') }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ ucfirst($credit->status) }}
+                    </p>
+
+                    <form
+                        method="POST"
+                        action="{{ route('admin.credits.update', $credit) }}"
+                        class="mt-4">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
 
-                        <div class="mt-4">
-                            <x-input-label for="analysis_notes" />
+                        <div>
+                            <x-input-label
+                                for="analysis_notes_{{ $credit->id }}"
+                                value="Observações da análise" />
+
                             <textarea
-                                id="analysis_notes"
+                                id="analysis_notes_{{ $credit->id }}"
                                 name="analysis_notes"
                                 class="block w-full mt-1 rounded border-gray-300"
                                 placeholder="Observações da análise (opcional)">{{ old('analysis_notes') }}</textarea>
-                            <x-input-error :messages="$errors->get('analysis_notes')" class="mt-2" />
+
+                            <x-input-error
+                                :messages="$errors->get('analysis_notes')"
+                                class="mt-2" />
                         </div>
 
                         <div class="mt-4 flex justify-center gap-2">
-                            <x-primary-button type="submit" name="status" value="aprovado">Aprovar</x-primary-button>
-                            <x-danger-button type="submit" name="status" value="rejeitado">Rejeitar</x-danger-button>
+                            <x-primary-button
+                                type="submit"
+                                name="status"
+                                value="aprovado">
+                                Aprovar
+                            </x-primary-button>
+
+                            <x-danger-button
+                                type="submit"
+                                name="status"
+                                value="rejeitado">
+                                Rejeitar
+                            </x-danger-button>
                         </div>
                     </form>
+
                 </div>
                 @endforeach
-                @endif
 
+                @endif
             </div>
         </div>
     </div>
-
 </x-app-layout>

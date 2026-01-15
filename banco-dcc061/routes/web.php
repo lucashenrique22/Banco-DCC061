@@ -50,7 +50,7 @@ Route::middleware(['auth', 'admin'])
 
         // Avaliação de crédito 
         Route::get('credits', [CreditAnalysisController::class, 'index'])->name('credits.index');
-        Route::post('credits/{creditRequest}', [CreditAnalysisController::class, 'update'])->name('credits.update');
+        Route::put('credits/{creditRequest}', [CreditAnalysisController::class, 'update'])->name('credits.update');
 
         // Gerenciar investimentos
         Route::resource('investments', AdminInvestmentController::class)->except(['show']);

@@ -6,7 +6,7 @@
         @csrf
 
         <div>
-            <h2 class="mb-4 text-xl font-semibold text-gray-900 text-center">{{ __('Sistema de Banco') }}</h2>
+            <h2 class="mb-4 text-xl py-4 font-semibold text-gray-900 text-center">{{ __('Sistema de Banco') }}</h2>
         </div>
 
         <!-- CPF -->
