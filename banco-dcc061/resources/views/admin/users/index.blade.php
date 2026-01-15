@@ -7,13 +7,20 @@
 
     <div class="pt-4 max-w-7xl mx-auto">
         @if (session('success'))
-        <div class="mb-4 font-medium text-sm text-center text-green-600">
+        <div class="mb-4 font-medium text-sm text-center text-green-600" data-success>
             {{ session('success') }}
         </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.querySelector('[data-success]');
+                if (alert) alert.remove();
+            }, 4000);
+        </script>
         @endif
 
-        <x-input-error :messages="session('error')" class="mb-4 text-center" />
-        
+        <x-input-error :messages="session('error')" class="mb-4 text-center" data-error />
+
         <div class="bg-white p-6 rounded shadow">
             <a href="{{ route('admin.users.create') }}"
                 class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
@@ -55,3 +62,14 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const errorAlert = document.querySelector('[data-error]');
+        if (errorAlert) {
+            setTimeout(() => {
+                errorAlert.remove();
+            }, 4000);
+        }
+    });
+</script>

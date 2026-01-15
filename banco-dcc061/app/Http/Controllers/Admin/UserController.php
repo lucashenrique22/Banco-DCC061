@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -52,18 +54,27 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'cpf' => 'required|unique:users',
+            'name' => 'required|string',
+            'cpf' => 'required|string|unique:users,cpf',
             'password' => 'required|min:6',
             'role' => 'required|in:administrador,usuario',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'cpf' => preg_replace('/\D/', '', $request->cpf),
-            'password' => Hash::make($request->password),
-            'role' => $request->role,
-        ]);
+        DB::transaction(function () use ($request) {
+            $user = User::create([
+                'name' => $request->name,
+                'cpf' => preg_replace('/\D/', '', $request->cpf),
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+
+            Account::create([
+                'user_id' => $user->id,
+                'account_number' => 'ACC' . str_pad($user->id, 6, '0', STR_PAD_LEFT),
+                'balance' => 0,
+                'active' => true,
+            ]);
+        });
 
         return redirect()->route('admin.users.index')->with('success', 'Usuário criado com sucesso!');
     }

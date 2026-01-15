@@ -13,21 +13,26 @@
                     @csrf
 
                     <x-input-label value="Nome" />
-                    <x-text-input id="name" name="name" class="w-full mb-4" required />
+                    <x-text-input id="name" name="name" class="w-full mb-4" value="{{ old('name') }}" required />
 
                     <x-input-label value="CPF" />
-                    <x-text-input id="cpf" name="cpf" class="w-full mb-4" required />
+                    <x-text-input id="cpf" name="cpf" class="w-full mb-4" value="{{ old('cpf') }}" required />
 
                     <x-input-label value="Senha" />
                     <x-text-input id="password" name="password" type="password" class="w-full mb-4" required />
-
+                    <x-input-error :messages="$errors->get('password')" class="mt-1" />
+                    
                     <x-input-label value="Perfil" />
                     <select name="role" class="w-full mb-4 rounded border-gray-300">
-                        <option value="usuario">Usuário</option>
-                        <option value="administrador">Administrador</option>
+                        <option value="usuario" @selected(old('role')=='usuario' )>Usuário</option>
+                        <option value="administrador" @selected(old('role')=='administrador' )>Administrador</option>
                     </select>
 
-                    <x-primary-button>Salvar</x-primary-button>
+                    <div class="flex gap-2">
+                        <x-primary-button>Salvar</x-primary-button>
+                        <a href="{{ route('admin.users.index')}}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700
+                     focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">Cancelar</a>
+                    </div>
                 </form>
 
             </div>
