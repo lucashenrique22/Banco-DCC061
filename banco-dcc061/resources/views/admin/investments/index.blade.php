@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             @if(session('success'))
-            <div class="mb-4 font-medium text-sm text-center text-green-600">
+            <div class="mb-4 font-medium text-sm text-center text-green-600" data-success>
                 {{ session('success') }}
             </div>
 
@@ -32,30 +32,31 @@
                 @else
                 <table class="w-full table-fixed border-collapse">
                     <thead>
-                            <tr class="border-b">
-                                <th class="text-center py-2">Nome</th>
-                                <th class="text-center py-2">Taxa (%)</th>
-                                <th class="text-center py-2">Prazo (meses)</th>
-                                <th class="text-center py-2">Valor mínimo</th>
-                                <th class="text-center py-2">Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($investments as $investment)
-                            <tr class="border-b">
-                                <td class="py-2 text-center">
-                                    {{ $investment->name }}
-                                </td>
-                                <td class="py-2 text-center">
-                                    {{ number_format($investment->profitability, 2, ',', '.') }}%
-                                </td>
-                                <td class="py-2 text-center">
-                                    {{ $investment->term_months }}
-                                </td>
-                                <td class="py-2 text-center">
-                                    R$ {{ number_format($investment->minimum_value, 2, ',', '.') }}
-                                </td>
-                                <td class="py-2 text-center flex justify-center items-center gap-2">
+                        <tr class="border-b">
+                            <th class="text-center py-2">Nome</th>
+                            <th class="text-center py-2">Taxa (%)</th>
+                            <th class="text-center py-2">Prazo (meses)</th>
+                            <th class="text-center py-2">Valor mínimo</th>
+                            <th class="text-center py-2">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($investments as $investment)
+                        <tr class="border-b">
+                            <td class="py-2 text-center">
+                                {{ $investment->name }}
+                            </td>
+                            <td class="py-2 text-center">
+                                {{ number_format($investment->profitability, 2, ',', '.') }}%
+                            </td>
+                            <td class="py-2 text-center">
+                                {{ $investment->term_months }}
+                            </td>
+                            <td class="py-2 text-center">
+                                R$ {{ number_format($investment->minimum_value, 2, ',', '.') }}
+                            </td>
+                            <td class="py-2 text-center">
+                                <div class="flex justify-center items-center gap-4">
                                     <a href="{{ route('admin.investments.edit', $investment) }}" class="text-blue-600">
                                         ✏️
                                     </a>
@@ -68,11 +69,12 @@
                                             🗑️
                                         </button>
                                     </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 @endif
 
             </div>
