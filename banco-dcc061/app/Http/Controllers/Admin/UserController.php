@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreUserRequest;
+use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\Account;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,44 +28,12 @@ class UserController extends Controller
         return view('admin.users.edit', ['user' => $user]);
     }
 
-    public function update(Request $request, User $user)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'cpf' => 'required|string|unique:users,cpf,' . $user->id,
-            'role' => 'required|in:administrador,usuario',
-            'password' => 'nullable|min:6',
-        ]);
-
-        $data = $request->only('name', 'cpf', 'role');
-
-        if ($request->filled('password')) {
-            $data['password'] = Hash::make($request->password);
-        }
-
-        $user->update([
-            'name' => $data['name'],
-            'cpf' => preg_replace('/\D/', '', $data['cpf']),
-            'role' => $data['role'],
-            'password' => $data['password'] ?? $user->password,
-        ]);
-
-        return redirect()->route('admin.users.index')->with('success', 'Usuário atualizado com sucesso!');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'cpf' => 'required|string|unique:users,cpf',
-            'password' => 'required|min:6',
-            'role' => 'required|in:administrador,usuario',
-        ]);
-
         DB::transaction(function () use ($request) {
             $user = User::create([
                 'name' => $request->name,
-                'cpf' => preg_replace('/\D/', '', $request->cpf),
+                'cpf' => $request->cpf,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
             ]);
@@ -72,11 +42,28 @@ class UserController extends Controller
                 'user_id' => $user->id,
                 'account_number' => 'ACC' . str_pad($user->id, 6, '0', STR_PAD_LEFT),
                 'balance' => 0,
-                'active' => true,
             ]);
         });
 
-        return redirect()->route('admin.users.index')->with('success', 'Usuário criado com sucesso!');
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', 'Usuário criado com sucesso!');
+    }
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $user->update([
+            'name' => $request->name,
+            'cpf' => $request->cpf,
+            'role' => $request->role,
+            'password' => $request->filled('password')
+                ? Hash::make($request->password)
+                : $user->password,
+        ]);
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', 'Usuário atualizado com sucesso!');
     }
 
     public function destroy(User $user)

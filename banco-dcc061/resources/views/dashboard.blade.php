@@ -7,9 +7,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- MENU ADMINISTRADOR -->
             @if(session('success'))
-            <div class="mb-4 font-medium text-lg text-center text-green-600">
+            <div class="mb-4 font-medium text-lg text-center text-green-600" data-success>
                 {{ session('success') }}
             </div>
+            
+            <script>
+                setTimeout(() => {
+                    const alert = document.querySelector('[data-success]');
+                    if (alert) alert.remove();
+                }, 4000);
+            </script>
             @endif
             @if(auth()->user()->isAdmin())
             <div class="mt-10">
