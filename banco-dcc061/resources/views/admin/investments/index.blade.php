@@ -60,15 +60,16 @@
                                     <a href="{{ route('admin.investments.edit', $investment) }}" class="text-blue-600">
                                         ✏️
                                     </a>
-                                    <form method="POST"
-                                        action="{{ route('admin.investments.destroy', $investment) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="text-red-600"
-                                            onclick="return confirm('Deseja remover este investimento?')">
-                                            🗑️
-                                        </button>
-                                    </form>
+                                    <button
+                                        type="button"
+                                        class="text-red-600"
+                                        x-data
+                                        x-on:click="$dispatch('open-delete-modal', {
+                                            id: {{ $investment->id }},
+                                            name: '{{ $investment->name }}'
+                                    })">
+                                        🗑️
+                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -80,4 +81,48 @@
             </div>
         </div>
     </div>
+
+    <div
+        x-data="{
+            open: false,
+            investmentId: null,
+            investmentName: ''
+        }"
+        x-on:open-delete-modal.window="
+            open = true;
+            investmentId = $event.detail.id;
+            investmentName = $event.detail.name;
+        "
+        x-on:close-delete-modal.window="
+            open = false;
+            investmentId = null;
+            investmentName = '';
+        "
+        x-show="open"
+        x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg mx-4 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                Confirmar exclusão
+            </h2>
+            <p class="mb-6">Tem certeza que deseja excluir o investimento "<span
+                    class="font-bold" x-text="investmentName"></span>"?</p>
+            <div class="flex justify-end gap-4">
+                <button
+                    type="button"
+                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded"
+                    x-on:click="$dispatch('close-delete-modal')">
+                    Cancelar
+                </button>
+                <form :action="`/admin/investments/${investmentId}`" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-red-600 text-white rounded">
+                        Excluir
+                    </button>
+                </form>
+            </div>
+        </div>
 </x-app-layout>

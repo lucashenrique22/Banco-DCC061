@@ -45,15 +45,16 @@
                             <a href="{{ route('admin.users.edit', $user) }}" class="text-blue-600 mr-3">
                                 ✏️
                             </a>
-                            <form method="POST"
-                                action="{{ route('admin.users.destroy', $user) }}"
-                                onsubmit="return confirm('Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">
-                                    🗑️
-                                </button>
-                            </form>
+                            <button
+                                type="button"
+                                class="text-red-600"
+                                x-data
+                                x-on:click="$dispatch('open-delete-modal', {
+                                        id: {{ $user->id }},
+                                        name: '{{ $user->name }}'
+                                    })">
+                                🗑️
+                            </button>
                         </td>
                     </tr>
                     @endforeach
@@ -61,6 +62,55 @@
             </table>
         </div>
     </div>
+    <div
+        x-data="{
+            open: false,
+            userId: null,
+            userName: ''
+        }"
+        x-on:open-delete-modal.window="open = true; userId = $event.detail.id; userName = $event.detail.name;
+    "
+        x-show="open"
+        x-cloak
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg mx-4 p-6">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                Confirmar exclusão
+            </h2>
+
+            <p class="text-gray-600 mb-6">
+                Tem certeza que deseja excluir o usuário
+                <strong x-text="userName"></strong>?
+                <br>
+                <span class="text-red-600 font-semibold">
+                    Essa ação não pode ser desfeita.
+                </span>
+            </p>
+
+            <div class="flex justify-end gap-3">
+                <button
+                    type="button"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    x-on:click="open = false">
+                    Cancelar
+                </button>
+
+                <form
+                    method="POST"
+                    x-bind:action="`/admin/users/${userId}`">
+                    @csrf
+                    @method('DELETE')
+
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        Excluir
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>
 
 <script>
