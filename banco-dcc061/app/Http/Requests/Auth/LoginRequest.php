@@ -37,8 +37,19 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => ['required', 'string', 'size:11'],
-            'password' => ['required', 'string'],
+            'cpf' => 'required|string|size:11|exists:users,cpf',
+            'password' => 'required|string|min:6',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'cpf.required' => 'O CPF é obrigatório.',
+            'cpf.size' => 'O CPF deve conter exatamente 11 dígitos.',
+            'cpf.exists' => 'O CPF informado não está cadastrado.',
+            'password.required' => 'A senha é obrigatória.',
+            'password.min' => 'A senha deve conter no mínimo 6 caracteres.',
         ];
     }
 

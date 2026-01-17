@@ -12,7 +12,7 @@
         <!-- CPF -->
         <div>
             <x-input-label for="cpf" :value="__('CPF')" />
-            <x-text-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" required autofocus />
+            <x-text-input id="cpf" class="block mt-1 w-full" type="text" name="cpf" :value="old('cpf')" />
             <x-input-error :messages="$errors->get('cpf')" class="mt-2" />
         </div>
 
@@ -22,8 +22,7 @@
 
             <x-text-input id="password" class="block mt-1 w-full"
                 type="password"
-                name="password"
-                required autocomplete="current-password" />
+                name="password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
