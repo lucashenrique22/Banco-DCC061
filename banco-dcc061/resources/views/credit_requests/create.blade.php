@@ -14,14 +14,16 @@
 
                     <div>
                         <x-input-label for="amount" value="Valor solicitado" />
-                        <x-text-input id="amount" name="amount" step="0.01" class="block w-full mt-1"/>
+                        <x-text-input id="amount" name="amount" step="0.01" class="block w-full mt-1" />
                         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                     </div>
 
-                    <div class="mt-6 flex justify-end">
+                    <div class="mt-6 flex justify-end gap-3">
                         <x-primary-button>
                             Solicitar Crédito
                         </x-primary-button>
+                        <a href="{{ route('dashboard')}}" class="inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-700
+                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Voltar</a>
                     </div>
 
                 </form>

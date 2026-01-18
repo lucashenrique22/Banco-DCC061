@@ -23,8 +23,8 @@
 
             <div class="bg-white p-6 rounded shadow">
                 <a href="{{ route('admin.investments.create') }}"
-                    class="mb-4 inline-block px-4 py-2 bg-blue-600 text-white rounded">
-                    Novo Investimento
+                    class="mb-4 inline-block px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded">
+                    Cadastrar Investimento
                 </a>
 
                 @if($investments->isEmpty())
@@ -57,18 +57,12 @@
                             </td>
                             <td class="py-2 text-center">
                                 <div class="flex justify-center items-center gap-4">
-                                    <a href="{{ route('admin.investments.edit', $investment) }}" class="text-blue-600">
-                                        ✏️
+                                    <a href="{{ route('admin.investments.edit', $investment) }}" class="text-gray-800 hover:text-gray-700 transition">
+                                        <i class="fas fa-edit"></i>
                                     </a>
-                                    <button
-                                        type="button"
-                                        class="text-red-600"
-                                        x-data
-                                        x-on:click="$dispatch('open-delete-modal', {
-                                            id: {{ $investment->id }},
-                                            name: '{{ $investment->name }}'
+                                    <button type="button" class="text-gray-800 hover:text-gray-700 transition" x-data x-on:click="$dispatch('open-delete-modal', {id: {{ $investment->id }},name: '{{ $investment->name }}'
                                     })">
-                                        🗑️
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                             </td>

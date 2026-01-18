@@ -23,8 +23,8 @@
 
         <div class="bg-white p-6 rounded shadow">
             <a href="{{ route('admin.users.create') }}"
-                class="mb-4 inline-block px-4 mt-4 py-2 bg-blue-600 text-white rounded">
-                Novo Usuário
+                class="mb-4 inline-block px-4 mt-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded">
+                Cadastrar Usuário
             </a>
             <table class="w-full table-fixed border-collapse">
                 <thead>
@@ -42,18 +42,19 @@
                         <td class="text-center py-2">{{ preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "\$1.\$2.\$3-\$4", $user->cpf) }}</td>
                         <td class="text-center py-2">{{ ucfirst($user->role) }}</td>
                         <td class="text-center py-2 flex justify-center items-center gap-2">
-                            <a href="{{ route('admin.users.edit', $user) }}" class="text-blue-600 mr-3">
-                                ✏️
+                            <a href="{{ route('admin.users.edit', $user) }}"
+                                class="text-gray-800 hover:text-gray-700 transition"
+                                title="Editar">
+                                <i class="fas fa-edit"></i>
                             </a>
+
                             <button
                                 type="button"
-                                class="text-red-600"
+                                class="text-gray-800 hover:text-gray-700 transition"
+                                title="Excluir"
                                 x-data
-                                x-on:click="$dispatch('open-delete-modal', {
-                                        id: {{ $user->id }},
-                                        name: '{{ $user->name }}'
-                                    })">
-                                🗑️
+                                x-on:click="$dispatch('open-delete-modal', {id: {{ $user->id }}, name: '{{ $user->name }}'})">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>

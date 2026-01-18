@@ -13,18 +13,15 @@
                     @csrf
 
                     <x-input-label for="password" value="Confirme sua senha para acessar o extrato" />
-                    <x-text-input
-                        id="password"
-                        name="password"
-                        type="password"
-                        class="block w-full mt-1"
-                        required />
+                    <x-text-input id="password" name="password" type="password" class="block w-full mt-1" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                    <div class="mt-4 flex justify-end">
+                    <div class="mt-4 flex justify-end gap-3">
                         <x-primary-button>
                             Acessar
                         </x-primary-button>
+                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-gray-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-700
+                     focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Voltar</a>
                     </div>
                 </form>
 
