@@ -14,45 +14,24 @@
 
                     <div>
                         <x-input-label value="Conta de Origem" />
-                        <x-text-input
-                            type="text"
-                            class="block w-full mt-1 bg-gray-200"
-                            value="{{ auth()->user()->account->account_number }}"
-                            disabled />
+                        <x-text-input type="text" class="block w-full mt-1 bg-gray-200" value="{{ auth()->user()->account->account_number }}" disabled />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="destination_account" value="Conta de Destino" />
-                        <x-text-input
-                            id="destination_account"
-                            name="destination_account"
-                            type="text"
-                            class="block w-full mt-1"
-                            required />
                         <x-input-error :messages="$errors->get('destination_account')" class="mt-2" />
+                        <x-text-input id="destination_account" name="destination_account" type="text" class="block w-full mt-1"/>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="amount" value="Valor da Transferência" />
-                        <x-text-input
-                            id="amount"
-                            name="amount"
-                            type="number"
-                            step="0.01"
-                            min="1"
-                            class="block w-full mt-1"
-                            required />
                         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
+                        <x-text-input id="amount" name="amount" step="0.01" min="1" class="block w-full mt-1"/>
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="password" value="Senha" />
-                        <x-text-input
-                            id="password"
-                            name="password"
-                            type="password"
-                            class="block w-full mt-1"
-                            required />
+                        <x-text-input id="password" name="password" type="password" class="block w-full mt-1"/>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 

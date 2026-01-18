@@ -14,8 +14,10 @@ class CreditRequestController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'amount' => ['required', 'numeric', 'min:100'],
+        $request->validate(['amount' => ['required', 'numeric', 'min:100'],], [
+            'amount.required' => 'O valor solicitado é obrigatório.',
+            'amount.numeric' => 'O valor solicitado deve ser numérico.',
+            'amount.min' => 'O valor solicitado deve ser pelo menos 100.',
         ]);
 
         CreditRequest::create([

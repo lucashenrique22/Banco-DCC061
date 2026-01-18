@@ -13,16 +13,12 @@
                     @csrf
                     <div>
                         <x-input-label value="Conta de Destino" />
-                        <x-text-input
-                            type="text"
-                            class="block w-full mt-1 bg-gray-200"
-                            value="{{ auth()->user()->account->account_number }}"
-                            disabled />
+                        <x-text-input type="text" class="block w-full mt-1 bg-gray-200" value="{{ auth()->user()->account->account_number }}" disabled />
                     </div>
 
                     <div class="mt-4">
                         <x-input-label for="amount" value="Valor do Depósito" />
-                        <x-text-input id="amount" name="amount" type="number" step="0.01" min="1" class="block w-full mt-1" required />
+                        <x-text-input id="amount" name="amount" step="0.01" min="1" class="block w-full mt-1" />
                         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                     </div>
 

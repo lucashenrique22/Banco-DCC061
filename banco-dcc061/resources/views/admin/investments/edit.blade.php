@@ -19,13 +19,13 @@
                     <x-text-input id="type" name="type" :value="old('type', $investment->type)" class="w-full mb-4" required />
 
                     <x-input-label value="Prazo (meses)" />
-                    <x-text-input id="term_months" name="term_months" type="number" :value="old('term_months', $investment->term_months)" class="w-full mb-4" required />
+                    <x-text-input id="term_months" name="term_months" :value="old('term_months', $investment->term_months)" class="w-full mb-4" required />
 
                     <x-input-label value="Valor Mínimo" />
-                    <x-text-input id="minimum_value" name="minimum_value" type="number" step="0.01" :value="old('minimum_value', $investment->minimum_value)" class="w-full mb-6" required />
+                    <x-text-input id="minimum_value" name="minimum_value" step="0.01" :value="old('minimum_value', $investment->minimum_value)" class="w-full mb-6" required />
 
                     <x-input-label value="Taxa (%)" />
-                    <x-text-input id="profitability" name="profitability" type="number" step="0.01" :value="old('profitability', $investment->profitability)" class="w-full mb-4" required />
+                    <x-text-input id="profitability" name="profitability" step="0.01" :value="old('profitability', $investment->profitability)" class="w-full mb-4" required />
                     <div class="flex gap-2">
                         <x-primary-button>Salvar</x-primary-button>
                         <a href="{{ route('admin.investments.index')}}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700

@@ -14,14 +14,7 @@
 
                     <div>
                         <x-input-label for="amount" value="Valor solicitado" />
-                        <x-text-input
-                            id="amount"
-                            name="amount"
-                            type="number"
-                            step="0.01"
-                            min="100"
-                            class="block w-full mt-1"
-                            required />
+                        <x-text-input id="amount" name="amount" step="0.01" class="block w-full mt-1"/>
                         <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                     </div>
 

@@ -21,15 +21,15 @@
 
                     <x-input-label value="Prazo (meses)" />
                     <x-input-error :messages="$errors->get('term_months')" />
-                    <x-text-input id="term_months" name="term_months" type="number" class="w-full mb-4" />
+                    <x-text-input id="term_months" name="term_months" class="w-full mb-4" />
 
                     <x-input-label value="Valor Mínimo" />
                     <x-input-error :messages="$errors->get('minimum_value')" />
-                    <x-text-input id="minimum_value" name="minimum_value" type="number" step="0.01" class="w-full mb-4" />
+                    <x-text-input id="minimum_value" name="minimum_value" step="0.01" class="w-full mb-4" />
 
                     <x-input-label value="Taxa (%)" />
                     <x-input-error :messages="$errors->get('profitability')" />
-                    <x-text-input id="profitability" name="profitability" type="number" step="0.01" class="w-full mb-4" />
+                    <x-text-input id="profitability" name="profitability" step="0.01" class="w-full mb-4" />
 
                     <div class="flex gap-3">
                         <x-primary-button>Salvar</x-primary-button>
