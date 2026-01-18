@@ -46,20 +46,11 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name.required' => 'O nome é obrigatório.',
+            'cpf.required' => 'O CPF é obrigatório.',
             'cpf.size' => 'O CPF deve conter exatamente 11 dígitos.',
             'cpf.unique' => 'O CPF informado já está em uso.',
             'password.required' => 'A senha é obrigatória.',
             'password.min' => 'A senha deve conter no mínimo 6 caracteres.',
-        ];
-    }
-
-    public function attributes(): array
-    {
-        return [
-            'name' => 'nome',
-            'cpf' => 'CPF',
-            'password' => 'senha',
-            'role' => 'perfil',
         ];
     }
 }

@@ -13,15 +13,16 @@
                     @csrf
 
                     <x-input-label value="Nome" />
+                    <x-input-error :messages="$errors->get('name')" />
                     <x-text-input id="name" name="name" class="w-full mb-4" value="{{ old('name') }}" />
 
                     <x-input-label value="CPF" />
-                    <x-text-input id="cpf" name="cpf" class="w-full mb-4" value="{{ old('cpf') }}" />
                     <x-input-error :messages="$errors->get('cpf')" />
+                    <x-text-input id="cpf" name="cpf" class="w-full mb-4" value="{{ old('cpf') }}" />
 
                     <x-input-label value="Senha" />
-                    <x-text-input id="password" name="password" type="password" class="w-full mb-4" />
                     <x-input-error :messages="$errors->get('password')" />
+                    <x-text-input id="password" name="password" type="password" class="w-full mb-4" />
 
                     <x-input-label value="Perfil" />
                     <select name="role" class="w-full mb-4 rounded border-gray-300">

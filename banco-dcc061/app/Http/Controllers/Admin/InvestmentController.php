@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreInvestmentRequest;
 use App\Models\Investment;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,8 @@ class InvestmentController extends Controller
         return view('admin.investments.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreInvestmentRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'term_months' => 'required|integer|min:1',
-            'minimum_value' => 'required|numeric|min:0',
-            'profitability' => 'required|numeric|min:0',
-        ]);
-
         Investment::create($request->all());
         return redirect()->route('admin.investments.index')->with('success', 'Investimento criado com sucesso!');
     }

@@ -68,8 +68,7 @@
             userId: null,
             userName: ''
         }"
-        x-on:open-delete-modal.window="open = true; userId = $event.detail.id; userName = $event.detail.name;
-    "
+        x-on:open-delete-modal.window="open = true; userId = $event.detail.id; userName = $event.detail.name;"
         x-show="open"
         x-cloak
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
