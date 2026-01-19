@@ -23,7 +23,7 @@
 
             <div class="mt-6 flex justify-between">
                 <a href="{{ route('account.statement') }}"
-                    class="text-blue-600 hover:underline">
+                    class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 rounded">
                     Voltar ao extrato
                 </a>
 
