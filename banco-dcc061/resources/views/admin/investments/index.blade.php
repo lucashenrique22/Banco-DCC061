@@ -104,7 +104,7 @@
             <div class="flex justify-end gap-4">
                 <button
                     type="button"
-                    class="px-4 py-2 bg-gray-300 text-gray-800 rounded"
+                    class="px-4 py-2 bg-gray-500 text-white hover:bg-gray-700 rounded"
                     x-on:click="$dispatch('close-delete-modal')">
                     Cancelar
                 </button>
@@ -113,7 +113,7 @@
                     @method('DELETE')
                     <button
                         type="submit"
-                        class="px-4 py-2 bg-red-600 text-white rounded">
+                        class="px-4 py-2 bg-gray-800 text-white hover:bg-gray-700 rounded">
                         Excluir
                     </button>
                 </form>

@@ -79,18 +79,14 @@
             </h2>
 
             <p class="text-gray-600 mb-6">
-                Tem certeza que deseja excluir o usuário
-                <strong x-text="userName"></strong>?
+                Tem certeza que deseja excluir o usuário <strong x-text="userName"></strong>?
                 <br>
-                <span class="text-red-600 font-semibold">
-                    Essa ação não pode ser desfeita.
-                </span>
             </p>
 
             <div class="flex justify-end gap-3">
                 <button
                     type="button"
-                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                    class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700"
                     x-on:click="open = false">
                     Cancelar
                 </button>
@@ -103,7 +99,7 @@
 
                     <button
                         type="submit"
-                        class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                        class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700">
                         Excluir
                     </button>
                 </form>
