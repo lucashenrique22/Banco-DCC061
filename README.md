@@ -1,3 +1,8 @@
+## Alunos
+- Lucas Henrique de Arruda Ferreira - 202165193AC
+- Isabella Mourão dos Santos Dias - 202165066AC
+- Frederico Dôndici Gama Vieira - 202165037AC
+
 # 🏦 Sistema Bancário — Laravel
 
 Projeto desenvolvido em Laravel com foco em simulação de operações bancárias, contemplando gestão de usuários, contas, transações financeiras, crédito e investimentos.
